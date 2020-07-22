@@ -1,0 +1,14 @@
+---
+- name: Deploying Node Environment
+  hosts: localhost
+  connection: local
+  become_user: root
+  become_method: sudo
+  become: true
+  gather_facts: false
+
+  vars:
+    target_user: ubuntu
+
+  roles:
+    - role: sharp/nodeenv-sls

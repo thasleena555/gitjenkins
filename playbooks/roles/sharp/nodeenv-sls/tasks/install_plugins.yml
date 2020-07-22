@@ -1,0 +1,33 @@
+---
+- block:
+  - name: Create requirements file for {{ node_env }}
+    template:
+      src: requirements.j2
+      dest: /tmp/{{ node_env }}_requirements.txt
+      owner: "{{ target_user }}"
+      mode: 0644
+
+  - name: Get home directory of {{ target_user }}
+    shell: "echo ~{{ target_user }}"
+    register: home_dir
+
+  - name: Make sure {{node_env}} environment does not exist
+    file:
+      path: "{{ env_dir }}/{{ node_env }}"
+      state: absent
+
+  - name: Create node environment and install necessary plugins for {{ node_env }}
+    shell: "nodeenv -n {{ node_version }} {{ env_dir }}/{{ node_env }} --requirements=/tmp/{{ node_env }}_requirements.txt"
+
+  - name: Verify node environment for {{ node_env }} is created
+    stat:
+      path: "{{ env_dir }}/{{ node_env }}"
+    register: node_env_dir
+    failed_when: not node_env_dir.stat.exists or node_env_dir.stat.isdir is not defined
+
+  - name: Delete requirements file for {{ node_env }}
+    file:
+      path: /tmp/{{ node_env }}_requirements.txt
+      state: absent
+  become_user: "{{ target_user }}"
+  become: True

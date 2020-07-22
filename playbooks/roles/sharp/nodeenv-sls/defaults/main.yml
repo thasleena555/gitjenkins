@@ -1,0 +1,10 @@
+env_dir: "{{ home_dir.stdout }}/node_env"
+node_envs:
+  - name: cco_lmsgw_v12
+    node_version: "12.16.1"
+    plugins:
+      - "requests"
+      - "serverless@1.48.0"
+      - "serverless-domain-manager"
+      - "serverless-add-api-key"
+      - "serverless-python-requirements"

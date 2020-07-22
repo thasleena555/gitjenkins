@@ -1,0 +1,19 @@
+---
+# install
+- name: Install python-pip
+  apt:
+    name: "python-pip"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install nodeenv
+  pip:
+    name: "nodeenv"
+
+- include: install_plugins.yml
+  vars:
+    node_env: "{{ item.name }}"
+    node_version: "{{ item.node_version }}"
+    env_plugins: "{{ item.plugins }}"
+  with_items: "{{ node_envs }}"
