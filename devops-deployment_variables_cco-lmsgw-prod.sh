@@ -17,8 +17,8 @@ export nas_keyname=cco-prod-lmsgw-key
 echo "$nas_schema_fax"
 # values are stored in the vault
 export nas_keyvalue=
-export nas_logstash_username=
-export nas_logstash_password=
+export nas_logstash_username=abc
+export nas_logstash_password=def
 ###### ONLY CHANGE THE VARIABLES WITHIN THIS COMMENT BLOCK ######
 
 ##### DO NOT CHANGE THE VARIABLES WITHIN THIS COMMENT BLOCK #####
