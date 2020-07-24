@@ -15,9 +15,9 @@ export nas_endpoint_type=REGIONAL
 export nas_domain=sharpbscloud.com
 export nas_keyname=cco-prod-lmsgw-key
 # values are stored in the vault
-export nas_keyvalue=
-export nas_logstash_username=
-export nas_logstash_password=
+export nas_keyvalue=abcdefghijkl
+export nas_logstash_username=abc
+export nas_logstash_password=123
 ###### ONLY CHANGE THE VARIABLES WITHIN THIS COMMENT BLOCK ######
 
 ##### DO NOT CHANGE THE VARIABLES WITHIN THIS COMMENT BLOCK #####
