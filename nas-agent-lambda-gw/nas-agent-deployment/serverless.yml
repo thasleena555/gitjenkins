@@ -26,21 +26,11 @@ package:
     - node_modules/**
     - package*
 
-plugins:
-  - serverless-domain-manager
-  - serverless-add-api-key
-  - serverless-python-requirements
-
+	
 custom:
-  pythonRequirements:
-    dockerizePip: true
   apiKeys: ${file(../getAPI.js):apikeys}
   apiname: ${file(../variables.yml):apiname}
   stage: ${file(../variables.yml):stage}
-  siteName: ${file(../variables.yml):hostedZoneName}
-  defaultCustomDomainName: ${self:custom.stage}-api.${self:custom.siteName}
-  customDomainName: ${file(../variables.yml):customDomainName, self:custom.defaultCustomDomainName}
-  basePath: ${file(../variables.yml):basePath}
   endPoint: ${file(../variables.yml):endPoint} #This is the for custom domain of API Gateway end point
   region: ${file(../variables.yml):region}
   dep-bucket: ${file(../variables.yml):dep-bucket}
@@ -55,13 +45,7 @@ custom:
   lms_password: ${file(../variables.yml):lms_logstash_password}
   lms_username: ${file(../variables.yml):lms_logstash_username}
 
-  #===============This is for the api gateway ===========================
-  customDomain:
-    domainName: ${self:custom.customDomainName} #This is API gateway sub domain like cco-devapi.cocoro-office.net
-    basePath: ${self:custom.basePath} # This is the basepath in the subdomain cco-devapi.cocoro-office.net
-    stage: ${self:custom.stage}
-    createRoute53Record: true
-    endpointType: ${self:custom.endPoint}
+  
 
 # ==============All the API Gateway and lambda Functions start  here===========================
 functions:
