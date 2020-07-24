@@ -1,0 +1,22 @@
+{
+  "name": "cco-lms-gateway",
+  "version": "1.0.0",
+  "description": "***NAS Agent*** is client side application running in NAS box which collects static and operational information.This information is published to LMS gateway.NAS agent provides a mechanism for applications running in NAS device to provide information about operational data. It also collects static information in NAS device. All collected information is posted to an LMS gateway.",
+  "main": "api-gwtest-prod.js",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0"
+  },
+  "devDependencies": {
+    "mocha": "^7.1.2"
+  },
+  "scripts": {
+    "test": "mocha -t 5000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.sharpb2bcloud.com:ssdi-cocoro/cco-lms-gateway.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

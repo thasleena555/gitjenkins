@@ -1,0 +1,28 @@
+#stack identifier like 'ap-usqa1'. it is used for stage name in API Gateway
+stage: ${env:nas_stage, 'dev' }
+#Target region to deploy
+region: ${env:nas_aws_region, 'ap-northeast-1'}
+#lambda environment variable for LMS
+lms_hostname: ${env:nas_lms_hostname, 'devco-logging.sharpb2bcloud.com'}
+schema_nas_info: ${env:nas_schema_nas_info, 'cocoro_sspagent_nasfile_v1'}
+schema_search: ${env:nas_schema_search, 'cocoro_search_v3'}
+schema_fax: ${env:nas_schema_fax, 'cocoro_fax_v3'}
+stack_nas_info: ${env:nas_stack_nas_info, 'cocoro-dev'}
+stack_search: ${env:nas_stack_search, 'cocoro-dev'}
+stack_fax: ${env:nas_stack_fax, 'cocoro-dev'}
+#LMS Logstash password
+lms_logstash_password: ${env:nas_logstash_password, ''}
+#LMS Logstash username
+lms_logstash_username: ${env:nas_logstash_username, 'user1'}
+#api gw realted information
+apiname: ${env:nas_apiname, 'custom-api-name'}
+#Base mapping in API Gateway for Endpoint
+basePath: ${env:nas_basemapping, 'v1'}
+# Specify depoyment bucket for serverless
+dep-bucket: ${env:nas_deployment_bucket_name, 'deployment.us-west-2.sharpb2bcloud.com'}
+#This is API gateway sub domain. default: ${self:custom.stage}-api.${self:custom.siteName}
+customDomainName: ${env:nas_custom_domain, self:custom.defaultCustomDomainName}
+#This is to set the endpoint as Regional or Edge
+endPoint: ${env:nas_endpoint_type, 'REGIONAL'}
+# Domain name of hosted zone
+hostedZoneName: ${env:nas_domain, 'sharpb2bcloud.com'}

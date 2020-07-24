@@ -1,0 +1,17 @@
+---
+- name: Make sure apt-installed aws-cli is not used
+  apt:
+    name: awscli
+    state: absent
+    
+- name: Install Pip to install latest aws-cli
+  apt:
+    name: python-pip
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+    
+- name: Install aws-cli using pip
+  pip:
+    name: awscli
+    state: latest

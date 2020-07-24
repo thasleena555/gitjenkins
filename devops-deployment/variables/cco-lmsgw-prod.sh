@@ -14,11 +14,10 @@ export nas_basemapping=lmsgw-v1
 export nas_endpoint_type=REGIONAL
 export nas_domain=sharpbscloud.com
 export nas_keyname=cco-prod-lmsgw-key
-echo "$nas_schema_fax"
 # values are stored in the vault
-export nas_keyvalue=lmn
-export nas_logstash_username=abc
-export nas_logstash_password=def
+export nas_keyvalue=
+export nas_logstash_username=
+export nas_logstash_password=
 ###### ONLY CHANGE THE VARIABLES WITHIN THIS COMMENT BLOCK ######
 
 ##### DO NOT CHANGE THE VARIABLES WITHIN THIS COMMENT BLOCK #####

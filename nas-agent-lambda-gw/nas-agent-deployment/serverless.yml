@@ -1,0 +1,85 @@
+service: lmsgw
+frameworkVersion: ">=1.1.0 <2.0.0"
+provider:
+  name: aws
+  runtime: python3.8
+  timeout: 30
+  #role: arn:aws:iam::855394529658:role/service-role/ssp-agent-post-data-lambda-v1-role-ljvuawi2
+  region: ${self:custom.region}
+  stage: ${self:custom.stage}
+  deploymentBucket: ${self:custom.dep-bucket}
+  endpointType: ${self:custom.endPoint} #This is the for API Gateway end point
+
+  #Allow to access to lambda and VPC =======================================================
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - execute-api:Invoke
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+      Resource: "*"
+#exclude files in a function
+package:
+  exclude:
+    - requirements.txt
+    - node_modules/**
+    - package*
+
+plugins:
+  - serverless-domain-manager
+  - serverless-add-api-key
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+  apiKeys: ${file(../getAPI.js):apikeys}
+  apiname: ${file(../variables.yml):apiname}
+  stage: ${file(../variables.yml):stage}
+  siteName: ${file(../variables.yml):hostedZoneName}
+  defaultCustomDomainName: ${self:custom.stage}-api.${self:custom.siteName}
+  customDomainName: ${file(../variables.yml):customDomainName, self:custom.defaultCustomDomainName}
+  basePath: ${file(../variables.yml):basePath}
+  endPoint: ${file(../variables.yml):endPoint} #This is the for custom domain of API Gateway end point
+  region: ${file(../variables.yml):region}
+  dep-bucket: ${file(../variables.yml):dep-bucket}
+  lms_hostname: ${file(../variables.yml):lms_hostname}
+  endPointLMS: "https://${self:custom.lms_hostname}/logstash"
+  schema_nas_info: ${file(../variables.yml):schema_nas_info}
+  schema_search: ${file(../variables.yml):schema_search}
+  schema_fax: ${file(../variables.yml):schema_fax}
+  stack_nas_info: ${file(../variables.yml):stack_nas_info}
+  stack_search: ${file(../variables.yml):stack_search}
+  stack_fax: ${file(../variables.yml):stack_fax}
+  lms_password: ${file(../variables.yml):lms_logstash_password}
+  lms_username: ${file(../variables.yml):lms_logstash_username}
+
+  #===============This is for the api gateway ===========================
+  customDomain:
+    domainName: ${self:custom.customDomainName} #This is API gateway sub domain like cco-devapi.cocoro-office.net
+    basePath: ${self:custom.basePath} # This is the basepath in the subdomain cco-devapi.cocoro-office.net
+    stage: ${self:custom.stage}
+    createRoute53Record: true
+    endpointType: ${self:custom.endPoint}
+
+# ==============All the API Gateway and lambda Functions start  here===========================
+functions:
+  nas-agent:
+    handler: nasagent_function.nasagent_handler
+    description: "lambda to post data to lms"
+    environment:
+      endpoint: ${self:custom.endPointLMS}
+      schema_nas_info: ${self:custom.schema_nas_info}
+      schema_search: ${self:custom.schema_search}
+      schema_fax: ${self:custom.schema_fax}
+      stack_nas_info: ${self:custom.stack_nas_info}
+      stack_search: ${self:custom.stack_search}
+      stack_fax: ${self:custom.stack_fax}      
+      password: ${self:custom.lms_password}
+      username: ${self:custom.lms_username}
+    events:
+      - http:
+          path: nas-agent/api/v1/data
+          method: post
+          private: true

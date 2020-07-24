@@ -1,0 +1,24 @@
+---
+- name: Add the gpg key for the official Docker repository to the system
+  apt_key:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+
+- name: Add the docker repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+    state: present
+    update_cache: yes
+
+- name: Install docker
+  apt:
+    name: docker-ce
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Append docker group to the user's groups
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
