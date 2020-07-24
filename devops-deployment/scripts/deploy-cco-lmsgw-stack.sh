@@ -60,7 +60,7 @@ if [ ! -d $nodeenv_dir ]; then
     exit 1
 fi
 echo -e $blue\===Activating nodeenv===$no_color
-. ./$nodeenv_dir/bin/activate
+. .$nodeenv_dir/bin/activate
 
 # Check node version
 node -v
