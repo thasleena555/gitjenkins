@@ -24,10 +24,10 @@ exitFunc() {
 
 # initial variables checking
 exit_code=0
-#if [ -z "$nas_aws_profile" ]; then
-#    displayError "nas_aws_profile - not set!"
-#    exit_code=1
-#fi
+if [ -z "$nas_aws_profile" ]; then
+    displayError "nas_aws_profile - not set!"
+    exit_code=1
+fi
 if [ -z "$nas_aws_region" ]; then
     displayError "nas_aws_region - not set!"
     exit_code=1
@@ -49,7 +49,7 @@ if [ $exit_code -ne 0 ]; then
 fi
 
 # set AWS Profile to the one inputted
-#export AWS_PROFILE=$nas_aws_profile
+export AWS_PROFILE=$nas_aws_profile
 # set AWS Region
 export AWS_REGION=$nas_aws_region
 
