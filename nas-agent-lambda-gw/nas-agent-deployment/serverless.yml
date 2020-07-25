@@ -7,6 +7,8 @@ provider:
   #role: arn:aws:iam::855394529658:role/service-role/ssp-agent-post-data-lambda-v1-role-ljvuawi2
   region: ${self:custom.region}
   stage: ${self:custom.stage}
+  deploymentBucket: ${self:custom.dep-bucket}
+  endpointType: ${self:custom.endPoint} #This is the for API Gateway end point
 
   #Allow to access to lambda and VPC =======================================================
   iamRoleStatements:
@@ -31,6 +33,7 @@ custom:
   stage: ${file(../variables.yml):stage}
   endPoint: ${file(../variables.yml):endPoint} #This is the for custom domain of API Gateway end point
   region: ${file(../variables.yml):region}
+  dep-bucket: ${file(../variables.yml):dep-bucket}
   lms_hostname: ${file(../variables.yml):lms_hostname}
   endPointLMS: "https://${self:custom.lms_hostname}/logstash"
   schema_nas_info: ${file(../variables.yml):schema_nas_info}
