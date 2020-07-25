@@ -1,26 +1,21 @@
-#!/bin/bash
-###### ONLY CHANGE THE VARIABLES WITHIN THIS COMMENT BLOCK ######
-export nas_aws_profile=jenkins_ssp
-export nas_stage=cocoro-prod
-export nas_aws_region=ap-northeast-1
-export nas_lms_hostname='ssp-logging.sharpbscloud.com'
-export nas_schema_nas_info=cocoro_sspagent_nasfile_v1
-export nas_schema_search=cocoro_search_v3
-export nas_schema_fax=cocoro_fax_v3
-export nas_stack_nas_info=cocoro-prod 
-export nas_stack_search=cocoro-prod
-export nas_stack_fax=cocoro-prod
-export nas_basemapping=lmsgw-v1
-export nas_endpoint_type=REGIONAL
-export nas_domain=sharpbscloud.com
-export nas_keyname=cco-prod-lmsgw-key
-# values are stored in the vault
-export nas_keyvalue=abcdefghijkl
-export nas_logstash_username=abc
-export nas_logstash_password=123
-###### ONLY CHANGE THE VARIABLES WITHIN THIS COMMENT BLOCK ######
+#/bin/bash
 
-##### DO NOT CHANGE THE VARIABLES WITHIN THIS COMMENT BLOCK #####
-export nas_custom_domain=cco-api.${nas_domain}
-export nas_deployment_bucket_name=deployment.ap-northeast-1.sharpbscloud.com
-##### DO NOT CHANGE THE VARIABLES WITHIN THIS COMMENT BLOCK #####
+export nas_stage='dev'
+export nas_aws_region='ap-northeast-1'
+export nas_lms_hostname='devco-logging.sharpb2bcloud.com'
+export nas_schema_nas_info='cocoro_sspagent_nasfile_v1'
+export nas_schema_search='cocoro_search_v3'
+export nas_schema_fax='cocoro_fax_v3'
+export nas_stack_nas_info='cocoro-dev'
+export nas_stack_search='cocoro-dev'
+export nas_stack_fax='cocoro-dev'
+export nas_logstash_password='foo'
+export nas_logstash_username='baa'
+export nas_apiname='custom-api-name'
+export nas_basemapping='v1'
+export nas_deployment_bucket_name='deployment.ap-northeast-1.cocoro-office.net'
+export nas_custom_domain='cco-devapi.cocoro-office.net'
+export nas_endpoint_type='REGIONAL'
+export nas_domain='cocoro-office.net'
+export nas_keyvalue='abcdefghijkl'
+export nas_keyname=cco-lmsgw-${nas_stage}-key
