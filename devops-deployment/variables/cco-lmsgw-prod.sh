@@ -1,5 +1,4 @@
 #/bin/bash
-export nas_aws_profile=jenkins
 export nas_stage='dev'
 export nas_aws_region='ap-northeast-1'
 export nas_lms_hostname='devco-logging.sharpb2bcloud.com'
