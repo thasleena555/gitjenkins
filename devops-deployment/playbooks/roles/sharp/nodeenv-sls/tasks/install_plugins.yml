@@ -11,7 +11,7 @@
     shell: "echo ~{{ target_user }}"
     register: home_dir
 
-  - name: Make sure {{node_env}} environment does not exist
+  - name: Make sure {{node_env}} environment does not exist in {{ env_dir }}/{{ node_env }}
     file:
       path: "{{ env_dir }}/{{ node_env }}"
       state: absent
