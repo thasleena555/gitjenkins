@@ -8,7 +8,7 @@
   gather_facts: true
 
   vars:
-    target_user:ubuntu
+    target_user: ubuntu
 
   roles:
     - role: os/base_tools
